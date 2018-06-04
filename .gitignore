@@ -1,0 +1,4 @@
+*.orig
+TargetJsonAnalyzer/*.user
+TargetJsonAnalyzer/bin
+TargetJsonAnalyzer/obj
