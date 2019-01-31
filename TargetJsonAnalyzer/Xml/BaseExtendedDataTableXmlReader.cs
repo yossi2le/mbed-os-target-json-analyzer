@@ -74,6 +74,11 @@ class BaseExtendedDataTableXmlReader : IExtendedDataInfoTable {
             }
 
             ParseXml(board_xml);
+
+            if (board_xml.NodeType == XmlNodeType.EndElement && board_xml.Name == _tableName)
+            {
+               break;
+            }
         }
     }
 

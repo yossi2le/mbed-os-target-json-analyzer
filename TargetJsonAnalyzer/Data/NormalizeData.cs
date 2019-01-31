@@ -55,6 +55,7 @@ class NormalizeData : INormalizeData {
     {
         _ds = ds;
         DataTable dt = _ds.Tables["Boards"];
+
         int index1 = 1;
         while (true) {
             var offspringRows = dt.Select("inx = '" + index1.ToString() + "'");
@@ -267,14 +268,15 @@ class NormalizeData : INormalizeData {
         var inheritsCol = offspringRow.Field<string>(dt.Columns.IndexOf("inherits"));
         if (inheritsCol == null) {
             return parentsRows;
-        }
+        }   
 
         var inherits = inheritsCol.Split(',');
         for (int i = inherits.Length - 1 ; i >= 0; i--) {
             string inherit = inherits[i];
             var parents = dt.Select("BoardName = '" + inherit.TrimEnd(' ').TrimStart(' ') + "'");
-            if (parents.Length == 0) {
-                throw new Exception("missing parent in the table");
+
+            if (parents.Length == 0) {         
+               throw new Exception("missing parent in the table");
             }
 
             var tempParentsList = GetAllParents(parents[0], dt);
